@@ -43,9 +43,18 @@ model Article {
   comments    Comment[]
   like        Like[]
   images      Image[]
+  coverimages CoverImages[]
 }
 
 //Define the model for the images links for the articles
+model CoverImages {
+  id        String @id @default(uuid())
+  imageLink String?
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+}
+
 model Image {
   id        String @id @default(uuid())
   imageLink String?

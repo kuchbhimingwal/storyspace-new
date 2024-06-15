@@ -1,18 +1,23 @@
 "use server"
 import client from "@/db"
 
-export async function addImg(articleId:string, imageUrl:string | undefined){
+export async function addImg(articleId:string, imageUrl:string | undefined, coverImg:string | undefined){
     console.log(articleId);
     console.log(imageUrl);
+    console.log(coverImg);
     
     
     try {
-      const res1 = await client.image.findMany({});
-      console.log(res1);
-      
       const res = await client.image.create({
         data:{
           imageLink : imageUrl,
+          articleId: articleId
+        }
+      });
+
+      const res2 = await client.coverImages.create({
+        data:{
+          imageLink : coverImg,
           articleId: articleId
         }
       });
