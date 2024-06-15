@@ -15,7 +15,7 @@ function Postcreate() {
   const { data: session, status } = useSession();
   const authurId = session?.user?.id;
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [coverFile, setCoverFIle] = useState<File | null>(null);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
   const [title , setTitle] = useState("");
   const [subtitle , setSubtitle] = useState("");
   const [content , setContent] = useState("");
@@ -37,12 +37,12 @@ function Postcreate() {
     const imageUrl = await UploadFile(formData);
 
     const coverFormData = new FormData();
-    formData.append('file', coverFile!);
+    coverFormData.append('file', coverFile!);
 
-    const coverImageUrl = await UploadFile(formData);
+    const coverImageUrl = await UploadFile(coverFormData);
 
-    // console.log(postId);
     // console.log(imageUrl);
+    // console.log(coverImageUrl);
     const postcreated = await addImg(postId, imageUrl, coverImageUrl);
     if(postcreated){
       setSelectedFile(null)
@@ -70,7 +70,7 @@ function Postcreate() {
           <Input label='Your story' placeholder='Write your story here' type='text' onchane={(e)=>{setContent(e)}}/>
         </div>
         <ImageInput title='Images' id='imageInput' onchane={(e)=>{setSelectedFile(e)}}/>
-        <ImageInput title='Cover' id='coverInput' onchane={(e)=>{setCoverFIle(e)}}/>
+        <ImageInput title='Cover' id='coverImageInput' onchane={(e)=>{setCoverFile(e)}}/>
         <Button title="Submit" onclick={handleSubmit}/>
       </div>
     </div>

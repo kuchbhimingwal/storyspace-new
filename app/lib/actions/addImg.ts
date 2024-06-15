@@ -22,7 +22,7 @@ export async function addImg(articleId:string, imageUrl:string | undefined, cove
         }
       });
 
-      console.log(res);
+      // console.log(res);
       return true
     } catch (error) {
       console.log(error);

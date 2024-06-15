@@ -6,6 +6,7 @@ const getPosts = async()=>{
   const res = await client.article.findMany({
     include:{
       images: true,
+      coverimages: true
     }
   });
   

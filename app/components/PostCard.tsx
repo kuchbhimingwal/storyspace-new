@@ -8,7 +8,10 @@ function PostCard({post}: any) {
     <div className='col-span-1 border border-gray p-6 m-5'>
       <div className='text-xs text-gray font-light mb-2'>{post.publishedAt.toDateString()}</div>
       <div className='w-full h-40'>
-        <img src={post.coverImages[0].imageLink} alt="" className='w-full h-full object-cover'/>
+        <img src={post.coverimages[0].imageLink} alt="" className='w-full h-full object-cover'/>
+      </div>
+      <div className='w-full h-40'>
+        <img src={post.images[0].imageLink} alt="" className='w-full h-full object-cover'/>
       </div>
       <div className='my-3'>
         <h2 className='text-gray font-semibold text-sm'>{post.title}</h2>
