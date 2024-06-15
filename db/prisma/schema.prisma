@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// Define the User model
+model User {
+  id        String @id @default(uuid())
+  fisrname  String   @unique
+  lastname  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  
+  // Define the relationship with Articles
+  articles  Article[]
+}
+
+// Define the Article model
+model Article {
+  id          String @id @default(uuid())
+  title       String
+  // subTitle    String?
+  content     String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  publishedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Define the many-to-many relationship with Tags
+  tags        Tag[]    @relation("ArticleTags")
+  comments    Comment[]
+  like        Like[]
+  images      Image[]
+}
+
+//Define the model for the images links for the articles
+model Image {
+  id        String @id @default(uuid())
+  imageLink String?
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+}
+// Define the Tag model
+model Tag {
+  id        String @id @default(uuid())
+  name      String    @unique
+  articles  Article[] @relation("ArticleTags")
+}
+
+// Define the Comment model
+model Comment {
+  id        String @id @default(uuid())
+  text      String
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+}
+
+// Define the Like model
+model Like {
+  id        String @id @default(uuid())
+  article   Article  @relation(fields: [articleId], references: [id])
+  articleId String
+  createdAt DateTime @default(now())
+}
