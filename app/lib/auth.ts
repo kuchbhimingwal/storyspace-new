@@ -34,7 +34,8 @@ export const authProvider = {
   callbacks: {
       // TODO: can u fix the type here? Using any is bad
       async session({ token, session }: any) {
-          session.user.id = token.sub
+          session.user.id = token.sub,
+          session.user.name = token.name
 
           return session
       }
