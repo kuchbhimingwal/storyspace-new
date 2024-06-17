@@ -1,15 +1,14 @@
 "use client"
 import React from 'react'
+import { useRouter } from 'next/navigation';
 
 function PostCard({post}: any) {
+  const router = useRouter();
   console.log(post);
   
   return (
     <div className='col-span-1 border border-gray p-6 m-5'>
       <div className='text-xs text-gray font-light mb-2'>{post.publishedAt.toDateString()}</div>
-      <div className='w-full h-40'>
-        <img src={post.coverimages[0].imageLink} alt="" className='w-full h-full object-cover'/>
-      </div>
       <div className='w-full h-40'>
         <img src={post.images[0].imageLink} alt="" className='w-full h-full object-cover'/>
       </div>
@@ -20,7 +19,7 @@ function PostCard({post}: any) {
         <p className='text-gray font-light text-xs'>{post.content.slice(0, 100)} ........</p>
       </div>
       <div>
-        <a href="#" className='text-gray font-light text-xs underline my-3'>Read More</a>
+        <a href="#" className='text-gray font-light text-xs underline my-3' onClick={()=>{router.push(`/post/${post.id}`)}}>Read More</a>
       </div>
       <div className='flex my-3'>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30.938 29.252" className='mr-4'>

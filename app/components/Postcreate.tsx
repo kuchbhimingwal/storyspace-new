@@ -29,30 +29,32 @@ function Postcreate() {
   const handleSubmit = async()=>{
     // console.log("author id"+ authurId);
     
-    const postId = await postblog(title,content,authurId);
-    
-    const formData = new FormData();
-    formData.append('file', selectedFile!);
-
-    const imageUrl = await UploadFile(formData);
-
-    const coverFormData = new FormData();
-    coverFormData.append('file', coverFile!);
-
-    const coverImageUrl = await UploadFile(coverFormData);
-
-    // console.log(imageUrl);
-    // console.log(coverImageUrl);
-    const postcreated = await addImg(postId, imageUrl, coverImageUrl);
-    if(postcreated){
-      setSelectedFile(null)
-      setTitle("");
-      setContent("");
-      alert("post created")
+    const postId = await postblog(title,subtitle,content,authurId);
+    if(postId){
+      const formData = new FormData();
+      formData.append('file', selectedFile!);
+  
+      const imageUrl = await UploadFile(formData);
+  
+      const coverFormData = new FormData();
+      coverFormData.append('file', coverFile!);
+  
+      const coverImageUrl = await UploadFile(coverFormData);
+  
+      // console.log(imageUrl);
+      // console.log(coverImageUrl);
+      const postcreated = await addImg(postId, imageUrl, coverImageUrl);
+      if(postcreated){
+        setSelectedFile(null)
+        setTitle("");
+        setContent("");
+        alert("post created")
+      } else {
+        alert("error while adding the image link to the db")
+      }
     } else {
-      alert("error while creating post")
+      alert("error while creating the post");
     }
-
   }
   return (
     <div className='flex justify-center'>
@@ -63,9 +65,9 @@ function Postcreate() {
         <div className=''>
           <Input label='Title' placeholder='Write your title' type='text' onchane={(e)=>{setTitle(e)}}/>
         </div>
-        {/* <div className=''>
+        <div className=''>
           <Input label='Subtitle' placeholder='Write your Subtitle' type='text' onchane={(e)=>{setSubtitle(e)}}/>
-        </div> */}
+        </div>
         <div className=''>
           <Input label='Your story' placeholder='Write your story here' type='text' onchane={(e)=>{setContent(e)}}/>
         </div>

@@ -1,15 +1,15 @@
 "use server"
 import client from "@/db"
 
-export async function postblog(title:string, content: string, authorId:string){
+export async function postblog(title:string,subTitle:string, content: string, authorId:string){
+  
   try {
     const res = await client.article.create({
       data:{
         title,
-        // subTitle:subtitle,
+        subTitle,
         content,
         authorId,
-
       }
     });
 
@@ -17,6 +17,6 @@ export async function postblog(title:string, content: string, authorId:string){
   } catch (error) {
     console.log(error);
     
-    return "error while creting the post"
+    return null
   }
 }
