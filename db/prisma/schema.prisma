@@ -24,6 +24,7 @@ model User {
   createdAt DateTime @default(now())
   
   // Define the relationship with Articles
+  comments    Comment[]
   articles  Article[]
 }
 
@@ -75,6 +76,8 @@ model Comment {
   text      String
   article   Article  @relation(fields: [articleId], references: [id])
   articleId String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
   createdAt DateTime @default(now())
 }
 
