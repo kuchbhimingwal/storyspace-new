@@ -17,8 +17,9 @@ function AddComment({postId, authurId}: {postId:string, authurId:string}) {
   }
   return (
     <div>
-      <Input label='Comment' placeholder='Enter your Comment' type='text' onchane={(e)=>{setComment(e)}}/>
-
+      <div className="my-5">
+        <Input label='Add Comment' placeholder='Enter your Comment' type='text' onchane={(e)=>{setComment(e)}}/>
+      </div>
       <Button title='post' onclick={clickHandler} />
     </div>
   )
