@@ -39,7 +39,7 @@ function SignupCard() {
           <Button title='Sign Up' onclick={clickHandler} />
         </div>
         <div className='text-center'>
-          <p className='font-sans font-thin text-black'>{res}</p>
+          <p className='font-sans font-medium text-black'>{res}</p>
         </div>
         <div className='text-center'>
           <p className='font-sans font-thin '>Already have a account? <span className='font-medium'>Login</span></p>

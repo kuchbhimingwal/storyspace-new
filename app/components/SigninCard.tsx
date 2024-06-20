@@ -19,7 +19,7 @@ function SigninCard() {
       redirect: false,
   });
   if(!res?.error){
-    console.log(res);
+    // console.log(res);
     router.push("/")
   } else {
     setError(res?.error)

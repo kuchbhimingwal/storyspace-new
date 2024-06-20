@@ -75,6 +75,7 @@ function Postcreate() {
         <ImageInput title='Cover' id='coverImageInput' onchane={(e)=>{setCoverFile(e)}}/>
         <Button title="Submit" onclick={handleSubmit}/>
       </div>
+      
     </div>
   )
 }

@@ -22,7 +22,7 @@ function ImageInput({id, onchane, title}:prop) {
                   <p className="mb-2 text-sm text-gray"><span className="font-semibold">Click to upload {title}</span> or drag and drop</p>
                   <p className="text-xs text-gray">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
               </div>
-              <input id={id} type='file' accept='image/*' onChange={handleChange} className="hidden" />
+              <input id={id} type='file' accept='image/*' onChange={handleChange} className="hidden"/>
           </label>
       </div> 
 

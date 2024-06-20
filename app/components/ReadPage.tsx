@@ -1,12 +1,20 @@
 "use server"
+import { getServerSession } from "next-auth";
+import { authProvider } from "../lib/auth";
 import client from "@/db"
 import PostCard from './PostCard'
+
+async function getSession() {
+  const session = await getServerSession(authProvider);
+  return session;
+}
 const getPosts = async()=>{
   try {
   const res = await client.article.findMany({
     include:{
       images: true,
-      coverimages: true
+      coverimages: true,
+      like: true
     }
   });
   
@@ -16,13 +24,36 @@ const getPosts = async()=>{
     return null;
   }
 }
+const getLikedPost = async(id:string)=>{
+  try {
+    const res = await client.like.findMany({
+      where:{
+        authorId: id
+      },
+      include:{
+        article:true
+      }
+    })
+    return res
+  } catch (error) {
+    console.log(error);
+    return null
+  }
+}
 async function ReadPage() {
+  const session = await getSession();
+  const id = session.user.id;
   const posts = await getPosts();
+  const likedPost = await getLikedPost(id);
+  const likedPostIds = likedPost?.map((like) => like.articleId);
+  console.log(likedPostIds);
   
   return (
     <div className='grid-cols-3 grid p-10'>
       {posts?.map((post)=>(
-        <PostCard post={post}/>
+        <div>
+        {likedPostIds?.includes(post.id) ? <PostCard post={post} liked={true} id={id}/> : <PostCard post={post} liked={false} id={id}/>}
+        </div>
       ))}
     </div>
   )

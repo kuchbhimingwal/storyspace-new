@@ -20,11 +20,13 @@ model User {
   fisrname  String   @unique
   lastname  String   @unique
   email     String   @unique
+  bio       String?
   password  String
   createdAt DateTime @default(now())
   
   // Define the relationship with Articles
   comments    Comment[]
+  like        Like[]
   articles  Article[]
 }
 
@@ -86,5 +88,9 @@ model Like {
   id        String @id @default(uuid())
   article   Article  @relation(fields: [articleId], references: [id])
   articleId String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
   createdAt DateTime @default(now())
+
+  @@unique([authorId, articleId])
 }

@@ -48,12 +48,7 @@ async function Postpage({postId} : {postId: string}) {
   const session = await getSession();
   const user = await getUser(session.user.id)
   const postDetils = await getPost(postId);
-  const postsByUser = await getPostByUser(session.user.id)
-  if(postsByUser){
-    console.log(postsByUser);
-  } else {
-    console.log("error while getting this post");
-  }
+  const postsByUser = await getPostByUser(session.user.id);
   
   return (
     <div>
