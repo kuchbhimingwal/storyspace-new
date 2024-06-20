@@ -23,14 +23,14 @@ export async function likeFunc(id:string, postId:string , like:boolean){
     }
   } else {
     try {
-      const res = await client.like.delete{
+      const res = await client.like.delete({
         where:{
           authorId_articleId:{
             authorId: id,
             articleId: postId
           }
         }
-      };
+      });
 
     return true
     } catch (error) {
