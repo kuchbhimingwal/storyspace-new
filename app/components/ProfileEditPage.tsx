@@ -46,7 +46,7 @@ function ProfileEditPage() {
   },[])
   return (
     <div className='flex justify-center'>
-      <div className='w-2/5 p-10 border rounded-3xl border-gray'>
+      <div className='w-4/5  md:w-3/5 lg:w-2/5 mt-10 p-10 border rounded-3xl border-gray'>
       {/* <div className="flex justify-between p-2 py-4 ">
               <div className="flex">
                 <div className='flex items-center justify-center text-lg mr-2 bg-black text-white rounded-full w-12 h-12  text-center'>{user?.fisrname.charAt(0)}</div>

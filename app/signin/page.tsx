@@ -2,7 +2,7 @@ import React from 'react'
 import SigninCard from '../components/SigninCard';
 function page() {
   return (
-    <div>
+    <div className='pt-10'>
       <SigninCard />
     </div>
   )

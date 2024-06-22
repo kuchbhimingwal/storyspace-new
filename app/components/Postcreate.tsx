@@ -10,7 +10,8 @@ import { useSession } from "next-auth/react";
 import { String } from 'aws-sdk/clients/batch';
 import { redirect } from 'next/navigation'
 import { useRouter } from 'next/router';
-
+import React from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 function Postcreate() {
   const { data: session, status } = useSession();
   const authurId = session?.user?.id;
@@ -19,6 +20,7 @@ function Postcreate() {
   const [title , setTitle] = useState("");
   const [subtitle , setSubtitle] = useState("");
   const [content , setContent] = useState("");
+  const [editorValue, setEditorVlaue] = useState("");
   const [url, setUrl] = useState("");
 
   useEffect(() => {
@@ -56,9 +58,12 @@ function Postcreate() {
       alert("error while creating the post");
     }
   }
+
+  // console.log(editorValue);
+  
   return (
     <div className='flex justify-center'>
-      <div className='w-2/5 p-10 border rounded-3xl border-gray'>
+      <div className='w-4/5 p-10 border rounded-3xl border-gray'>
         <div className='mb-4'>
           <h2 className='text-3xl font-semibold text-gray font-sans'>Write your stroy here</h2>
         </div>
@@ -68,8 +73,20 @@ function Postcreate() {
         <div className=''>
           <Input label='Subtitle' placeholder='Write your Subtitle' type='text' onchane={(e)=>{setSubtitle(e)}}/>
         </div>
-        <div className=''>
-          <Input label='Your story' placeholder='Write your story here' type='text' onchane={(e)=>{setContent(e)}}/>
+        <div className='mt-3'>
+          {/* <Input label='Your story' placeholder='Write your story here' type='text' onchane={(e)=>{setContent(e)}}/> */}
+          <p className="w-full text-gray font-medium py-3 text-sm font-sans">Your Story</p>
+          <Editor
+              onEditorChange={(newValue, editor)=>{
+                setContent(newValue)
+              }}
+              apiKey='c395paraunmx9lm4o237g3xd20nps1vo6b4p6ue1co1rd0cs'
+              init={{
+                plugins: 'anchor autolink charmap codesample emoticons lists searchreplace table visualblocks wordcount linkchecker markdown',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+              }}
+              initialValue="Write your story here!"
+            />
         </div>
         <ImageInput title='Images' id='imageInput' onchane={(e)=>{setSelectedFile(e)}}/>
         <ImageInput title='Cover' id='coverImageInput' onchane={(e)=>{setCoverFile(e)}}/>

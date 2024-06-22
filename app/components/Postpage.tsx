@@ -1,7 +1,14 @@
 import { getServerSession } from "next-auth"
 import client from "@/db"
 import { authProvider } from "../lib/auth";
-import PostCard from './PostCard';
+import PostCard from "./PostCardNoLike";
+import { redirect } from 'next/navigation'
+import DOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
+
+const window = new JSDOM('').window;
+const purify = DOMPurify(window);
+
 async function getSession() {
   const session = await getServerSession(authProvider);
   return session;
@@ -46,22 +53,30 @@ async function getPost(postId: string){
 }
 async function Postpage({postId} : {postId: string}) {
   const session = await getSession();
+  if(!session){
+    redirect('/api/auth/signin');
+  }
   const user = await getUser(session.user.id)
   const postDetils = await getPost(postId);
   const postsByUser = await getPostByUser(session.user.id);
+  // const content = postDetils?.content;
+  console.log(postDetils?.content);
   
+  const createMarkup = (html) => {
+    return { __html: purify.sanitize(html) };
+  };
   return (
     <div>
       <div className="border-b border-gray">
-        <div className="relative w-full h-80">
-          <img src={postDetils?.coverimages[0].imageLink} className="w-full h-full object-cover" />
+        <div className="relative w-full h-40 md:h-80">
+          <img src={postDetils?.coverimages[0].imageLink} className="w-full h-full object-cover"/>
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <div className="absolute inset-0 flex items-center justify-center md:justify-normal md:pl-20">
-            <h1 className="text-white text-4xl font-light w-1/3">{postDetils?.title}</h1>
+          <div className="absolute inset-0 flex items-center p-10 md:p-0 w-full md:justify-normal md:pl-20">
+            <h1 className="text-white text-md md:text-4xl font-light w-1/3">{postDetils?.title}</h1>
           </div>
         </div>
         <div className="flex justify-center pt-5">
-          <div className="w-2/5">
+          <div className="w-4/5  md:w-3/5 lg:w-2/5  ">
             <h1 className="font-bold text-xl p-2">{postDetils?.title}</h1>
             <h3 className="font-light text-sm p-2">{postDetils?.subTitle}</h3>
             <div className="flex justify-between p-2 py-4 border-b border-gray">
@@ -92,14 +107,15 @@ async function Postpage({postId} : {postId: string}) {
               <img src={postDetils?.images[0].imageLink} alt="" className='w-full h-full object-cover'/>
             </div>
             <div className="p-2 py-5">
-              <p className="font-light">{postDetils?.content}</p>
+            <div dangerouslySetInnerHTML={createMarkup(postDetils?.content)} />
+              {/* <p className="font-light">{postDetils?.content}</p> */}
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex justify-center">
-        <div className="w-2/4">
+        <div className="w-4/5 md:w-3/5 lg:w-2/5">
 
         <div className="flex justify-between p-2 py-4 border-b border-gray">
               <div className="flex">
@@ -117,7 +133,7 @@ async function Postpage({postId} : {postId: string}) {
         </div>
         <div>
           <h1 className="font-medium text-gray py-5">More from Arslan Ahmad </h1>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
             {postsByUser.map((post)=>(
               <PostCard post={post}/>
             ))}

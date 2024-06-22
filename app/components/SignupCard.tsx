@@ -3,7 +3,10 @@ import React, { useState } from 'react'
 import Input from '../components/Input'
 import Button from './Button';
 import { signupAction } from "../lib/actions/signup"
+import { useRouter } from 'next/navigation';
+
 function SignupCard() {
+  const router = useRouter();
   const [firstName , setFirstName] = useState("");
   const [lastName , setLastName] = useState("");
   const [email , setEmail] = useState("");
@@ -16,7 +19,7 @@ function SignupCard() {
   }
   return (
     <div className='flex justify-center'>
-      <div className='w-2/5 p-10 border rounded-3xl border-gray'>
+      <div className='w-4/5  md:w-3/5 lg:w-2/5 p-10 border rounded-3xl border-gray'>
         <div className='my-4'>
           <h2 className='text-3xl font-semibold text-gray font-sans'>NEW ACCOUNT</h2>
         </div>
@@ -42,7 +45,7 @@ function SignupCard() {
           <p className='font-sans font-medium text-black'>{res}</p>
         </div>
         <div className='text-center'>
-          <p className='font-sans font-thin '>Already have a account? <span className='font-medium'>Login</span></p>
+          <p className='font-sans font-thin '>Already have a account? <span className='font-medium cursor-pointer' onClick={()=>{router.push("/signin")}}>Login</span></p>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authProvider } from "../lib/auth";
 import client from "@/db"
 import PostCard from './PostCard'
+import { redirect } from 'next/navigation'
 
 async function getSession() {
   const session = await getServerSession(authProvider);
@@ -42,6 +43,9 @@ const getLikedPost = async(id:string)=>{
 }
 async function ReadPage() {
   const session = await getSession();
+  if(!session){
+    redirect('/api/auth/signin');
+  }
   const id = session.user.id;
   const posts = await getPosts();
   const likedPost = await getLikedPost(id);
@@ -49,10 +53,10 @@ async function ReadPage() {
   console.log(likedPostIds);
   
   return (
-    <div className='grid-cols-3 grid p-10'>
+    <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid p-10'>
       {posts?.map((post)=>(
         <div>
-        {likedPostIds?.includes(post.id) ? <PostCard post={post} liked={true} id={id}/> : <PostCard post={post} liked={false} id={id}/>}
+        {likedPostIds?.includes(post.id) ? <PostCard post={post} liked={true} id={id} /> : <PostCard post={post} liked={false} id={id}/>}
         </div>
       ))}
     </div>

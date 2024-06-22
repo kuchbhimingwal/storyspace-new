@@ -20,7 +20,7 @@ function SigninCard() {
   });
   if(!res?.error){
     // console.log(res);
-    router.push("/")
+    router.push("/read")
   } else {
     setError(res?.error)
     console.log(res)
@@ -28,7 +28,7 @@ function SigninCard() {
   }
   return (
     <div className='flex justify-center'>
-      <div className='w-2/5 p-10 border rounded-3xl border-gray'>
+      <div className='w-4/5  md:w-3/5 lg:w-2/5 p-10 border rounded-3xl border-gray'>
         <div className='my-4'>
           <h2 className='text-3xl font-semibold text-gray font-sans'>WELCOME BACK</h2>
         </div>
@@ -48,7 +48,7 @@ function SigninCard() {
           <p className='font-sans font-thin text-black'>{error}</p>
         </div>
         <div className='text-center'>
-          <p className='font-sans font-thin '>Dont have a account? <span className='font-medium'>Sign up</span></p>
+          <p className='font-sans font-thin '>Dont have a account? <span className='font-medium cursor-pointer' onClick={()=>{router.push('/signup')}}>Sign up</span></p>
         </div>
       </div>
       </div>

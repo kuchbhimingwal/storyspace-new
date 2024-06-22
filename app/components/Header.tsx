@@ -8,16 +8,15 @@ function Header() {
   const email = session.data?.user?.email;
   const router = useRouter();
   return (
-    <div className='flex justify-between'>
-      <div>
-       <Image src={`/SsLogo.png`} alt='logo' width="35" height="50" className='p-1'/>
+    <div className='flex justify-between'> 
+      <div onClick={()=>{router.push(`/`)}}>
+       <Image src={`/SsLogo.png`} alt='logo' width="35" height="50" className='p-1 cursor-pointer'/>
       </div>
       <div className='flex'>
-        <a onClick={()=>{router.push(`/write`)}} className='font-sans font-light p-3'>Write</a>
-        <a onClick={()=>{router.push(`/read`)}} className='font-sans font-light p-3'>Read</a>
-        <a href="#" className='font-sans font-light p-3'>About us</a>
-        {email}
-        {email ? <button onClick={async()=>{await signOut()}}>logout</button> : <button onClick={()=>{router.push('/api/auth/signin')}}>login</button>}
+        <a onClick={()=>{router.push(`/write`)}} className='font-sans text-lighgray hover:text-gray font-light p-3 cursor-pointer'>Write</a>
+        <a onClick={()=>{router.push(`/read`)}} className='font-sans text-lighgray hover:text-gray font-light p-3 cursor-pointer'>Read</a>
+        <a href="#" className='font-sans text-lighgray hover:text-gray font-light p-3'>About us</a>
+        {email ? <button onClick={()=>{router.push('/profile')}} className='font-sans font-light text-lighgray hover:text-gray p-3 cursor-pointer'>Profile</button> : <button onClick={()=>{router.push('/api/auth/signin')}} className='font-sans text-lighgray font-light hover:text-gray p-3 cursor-pointer'>Login</button>}
       </div>
     </div>
   )

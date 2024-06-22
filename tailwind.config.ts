@@ -25,7 +25,7 @@ const config: Config = {
       'silver': '#ecebff',
       'bubble-gum': '#ff77e9',
       'bermuda': '#78dcca',
-      "lighgray": "#EDEDED",
+      "lighgray": "#b5b5b5",
       "gray": "#9B9B9B",
       "darkgray": "#7C7C7C"
     },
