@@ -53,7 +53,7 @@ async function page() {
               <div className="">
                   <div className='flex my-3'>
                     <Link href="/profile/edit">
-                      <h1 className="text-mainpurple font-bold" >Edit Profile:</h1>
+                      <h2 className="text-mainpurple font-bold" >Edit Profile:</h2>
                     </Link>
                   </div>
               </div>
@@ -61,7 +61,7 @@ async function page() {
         <div className="p-2 border-b pb-5 border-gray font-light text-lg text-gray">{user?.bio ? user?.bio: "Bio not added"}</div>
         <LogoutButton title='Log out'/>
         <div>
-          <h1 className="font-medium text-gray py-5">More from Arslan Ahmad </h1>
+          <h2 className="font-medium text-gray py-5">More from {user?.fisrname}</h2>
           <div className="grid lg:grid-cols-2 grid-cols-1">
             {postsByUser.map((post)=>(
               <PostCard post={post}/>

@@ -40,7 +40,11 @@ function PostCard({post , liked, id}: any) {
         <h2 className='text-gray font-semibold text-sm'>{post.title}</h2>
       </div>
       <div>
-        <p className='text-gray font-light text-xs'>{post.content.slice(0, 100)} ........</p>
+        <p className='text-gray font-light text-xs'>
+          <div 
+            className="prose" 
+            dangerouslySetInnerHTML={{ __html: post.content.slice(0, 100) }} 
+          /> ........</p>
       </div>
       <div>
         <a href="#" className='text-gray font-light text-xs underline my-3' onClick={()=>{router.push(`/post/${post.id}`)}}>Read More</a>

@@ -15,11 +15,11 @@ ol{
 }
 
 em{
-  @apply italic;
+  @apply italic my-2;
 }
 
 s{
-  @apply line-through;
+  @apply line-through my-2;
 } 
 
 td {
@@ -27,5 +27,5 @@ td {
 }
 
 h1 {
-  @apply font-bold text-3xl;
+  @apply font-bold text-3xl my-2;
 }
