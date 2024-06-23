@@ -21,14 +21,14 @@ async function CommentSection({postId}: {postId: string}) {
   const session = await getSession();
   const userId = session.user.id;
   const comments = await getComments(postId);
-  console.log(comments);
+  // console.log(comments);
   
   return (
     <div className='flex justify-center'>
       <div className='w-2/5 p-10 border rounded-3xl border-gray'>
       <h1 className='font-medium text-2xl text-gray'> Comments {comments.length}</h1>
       <div>
-        {comments.map((comment)=>(
+        {comments.map((comment:any)=>(
           <div className='flex my-5'>
             <div className=''>
 
