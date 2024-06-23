@@ -49,7 +49,7 @@ async function ReadPage() {
   const id = session.user.id;
   const posts = await getPosts();
   const likedPost = await getLikedPost(id);
-  const likedPostIds = likedPost?.map((like) => like.articleId);
+  const likedPostIds = likedPost?.map((like:any) => like.articleId);
   console.log(likedPostIds);
   
   return (
