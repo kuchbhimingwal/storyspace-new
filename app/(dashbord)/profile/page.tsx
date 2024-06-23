@@ -63,7 +63,7 @@ async function page() {
         <div>
           <h2 className="font-medium text-gray py-5">More from {user?.fisrname}</h2>
           <div className="grid lg:grid-cols-2 grid-cols-1">
-            {postsByUser.map((post)=>(
+            {postsByUser.map((post:any)=>(
               <PostCard post={post}/>
             ))}
           </div>
