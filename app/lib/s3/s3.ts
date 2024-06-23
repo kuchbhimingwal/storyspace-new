@@ -5,8 +5,8 @@ import { promisify } from "util"
 const randomBytes = promisify(crypto.randomBytes)
 const region ="us-east-1"
 const bucketName = "storyspace-images-bucket"
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+const accessKeyId = process.env.ACCESS_KEY_ID
+const secretAccessKey = process.env.SECRET_ACCESS_KEY
 
 const s3 = new aws.S3({
   region,
