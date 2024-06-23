@@ -20,9 +20,11 @@ function ProfileEditPage() {
     createdAt: Date});
 
   const session = useSession();
+  //@ts-ignore
   const userId = session.data?.user?.id;
 
   const clickHandler =async()=>{
+    //@ts-ignore
     const userId = session.data?.user?.id;
     console.log((userId));
     
@@ -37,6 +39,7 @@ function ProfileEditPage() {
     const datafetch = async()=>{
       const user = await getUser(userId);
       if(user){
+        //@ts-ignore
         setUser(user);
       }
     }

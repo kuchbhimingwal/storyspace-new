@@ -61,15 +61,15 @@ async function Postpage({postId} : {postId: string}) {
   const postsByUser = await getPostByUser(session.user.id);
   // const content = postDetils?.content;
   console.log(postDetils?.content);
-  
+  //@ts-ignore
   const createMarkup = (html) => {
     return { __html: purify.sanitize(html) };
-  };
+  }; 
   return (
     <div>
       <div className="border-b border-gray">
         <div className="relative w-full h-40 md:h-80">
-          <img src={postDetils?.coverimages[0].imageLink} className="w-full h-full object-cover"/>
+          {postDetils?.coverimages[0].imageLink ? <img src={postDetils?.coverimages[0].imageLink} className="w-full h-full object-cover"/> : ""}
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="absolute inset-0 flex justify-center items-center md:p-0 w-full md:justify-normal md:pl-20">
             <h2 className="text-white text-md md:text-4xl font-light w-1/3">{postDetils?.title}</h2>
@@ -104,7 +104,8 @@ async function Postpage({postId} : {postId: string}) {
             </div>
 
             <div className='w-full p-2 pt-5'>
-              <img src={postDetils?.images[0].imageLink} alt="" className='w-full h-full object-cover'/>
+              {postDetils?.images[0].imageLink ? <img src={postDetils?.images[0].imageLink} alt="" className='w-full h-full object-cover'/> : ""}
+              
             </div>
             <div className="p-2 py-5">
             <div dangerouslySetInnerHTML={createMarkup(postDetils?.content)} />

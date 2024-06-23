@@ -14,6 +14,7 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 function Postcreate() {
   const { data: session, status } = useSession();
+  //@ts-ignore
   const authurId = session?.user?.id;
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [coverFile, setCoverFile] = useState<File | null>(null);
