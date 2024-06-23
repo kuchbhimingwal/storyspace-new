@@ -41,7 +41,7 @@ export default async function Home() {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {!posts ? "" : posts.map((post)=>(
+            {!posts ? "" : posts.map((post:any)=>(
               <PostCard post={post}/>
             ))}
           </div>
