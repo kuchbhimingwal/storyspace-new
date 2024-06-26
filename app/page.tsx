@@ -1,31 +1,14 @@
 import Image from "next/image";
 import client from "@/db"
 import Link from 'next/link';
-import PostCard from "./components/PostCardNoLike";
+import FrontPagePosts from "./components/FrontPagePosts";
 const dataFetching = async()=>{
   const users = await client.user.findMany({});
   return users
 }
-const getPosts = async()=>{
-  try {
-  const res = await client.article.findMany({
-    include:{
-      images: true,
-      coverimages: true,
-      like: true
-    }
-  });
-  
-  return res;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
 
 export default async function Home() {
   const users = await dataFetching();
-  const posts = await getPosts();
   console.log(users)
   return (
     <div>
@@ -39,12 +22,8 @@ export default async function Home() {
               Start Writing
             </button>
         </Link>
+        <FrontPagePosts />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {!posts ? "" : posts.map((post:any)=>(
-              <PostCard post={post}/>
-            ))}
-          </div>
    </div>
   );
 }
