@@ -53,7 +53,7 @@ async function ReadPage() {
   console.log(likedPostIds);
   
   return (
-    <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid p-10'>
+    <div className='grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid p-0 md:p-10'>
       {posts?.map((post:any)=>(
         <div>
         {likedPostIds?.includes(post.id) ? <PostCard post={post} liked={true} id={id} /> : <PostCard post={post} liked={false} id={id}/>}

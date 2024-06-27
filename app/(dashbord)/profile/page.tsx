@@ -41,7 +41,7 @@ async function page() {
   
   return (
     <div className='flex justify-center'>
-      <div className='w-4/5  md:w-3/5 p-10  mt-5 border rounded-3xl border-gray'>
+      <div className='w-full m-3  md:w-3/5 md:p-10 p-3  mt-5 border rounded-3xl border-gray'>
       <div className="flex flex-col md:flex-row justify-between p-2 py-4 ">
               <div className="flex">
                 <div className='flex items-center justify-center text-lg mr-2 bg-black text-white rounded-full w-12 h-12  text-center'>{user?.fisrname.charAt(0)}</div>

@@ -19,7 +19,7 @@ function SignupCard() {
   }
   return (
     <div className='flex justify-center'>
-      <div className='w-4/5  md:w-3/5 lg:w-2/5 p-10 border rounded-3xl border-gray'>
+      <div className='w-full m-3  md:w-3/5 md:p-10 p-3 lg:w-2/5 border rounded-3xl border-gray'>
         <div className='my-4'>
           <h2 className='text-3xl font-semibold text-gray font-sans'>NEW ACCOUNT</h2>
         </div>
