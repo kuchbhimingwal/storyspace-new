@@ -66,7 +66,7 @@ function Postcreate() {
     <div className='flex justify-center'>
       <div className='w-full m-3 md:m-0 md:w-4/5 p-3 md:p-10 border rounded-3xl border-gray'>
         <div className='mb-4'>
-          <h2 className='text-3xl font-semibold text-gray font-sans'>Write your stroy here</h2>
+          <h2 className='text-3xl font-semibold text-gray font-sans mt-3 md:mt-0'>Write your stroy here</h2>
         </div>
         <div className=''>
           <Input label='Title' placeholder='Write your title' type='text' onchane={(e)=>{setTitle(e)}}/>
